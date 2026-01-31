@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cybersecurity & AI Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #12182b;
+      --accent: #4fd1c5;
+      --accent-2: #667eea;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1a2140, transparent),
+                  radial-gradient(800px 400px at 90% 10%, #0f766e, transparent),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      backdrop-filter: blur(12px);
+      background: rgba(11,15,26,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav a {
+      margin-left: 24px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav a:hover { color: var(--text); }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 120px 24px 80px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(79,209,197,0.2), rgba(102,126,234,0.2));
+      border: 1px solid rgba(255,255,255,0.12);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    .actions a {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 600;
+      margin-right: 12px;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0b0f1a;
+    }
+
+    .secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .photo {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1/1;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1f2937, #020617);
+      border: 1px solid rgba(255,255,255,0.1);
+      justify-self: center;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 24px;
+      transition: transform .3s ease, border-color .3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(79,209,197,0.6);
+    }
+
+    .card h3 { margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 14px; }
+
+    /* Certificates */
+    .cert {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cert img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      background: #020617;
+      object-fit: cover;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px 60px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Animations */
+    .reveal { opacity: 0; transform: translateY(20px); transition: .6s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero p { margin-left: auto; margin-right: auto; }
+  .actions a { margin-bottom: 12px; display:block; }
+  header .nav { flex-direction: column; gap: 12px; }
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 34px; }
+  h2 { font-size: 26px; }
+  section { padding: 100px 16px 60px; }
+  .grid { grid-template-columns: 1fr; }
+  .photo { max-width: 240px; }
+  header .nav nav a { margin: 0 10px; font-size: 13px; }
+  #loginPage > div { padding: 24px; }
+}
+      .hero p { margin-left: auto; margin-right: auto; }
+      .actions a { margin-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginPage" style="min-height:100vh;display:flex;align-items:center;justify-content:center;">
+  <div style="width:100%;max-width:420px;background:#0b0f1a;border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:32px;">
+    <h2 style="margin-bottom:8px;">Secure Login</h2>
+    <p style="color:#9ca3af;font-size:14px;margin-bottom:20px;">Cybersecurity & AI Dashboard</p>
+    <input id="username" placeholder="Username" style="width:100%;padding:14px;border-radius:12px;background:#020617;border:1px solid rgba(255,255,255,0.15);color:white;margin-bottom:14px;">
+    <input id="password" type="password" placeholder="Password" style="width:100%;padding:14px;border-radius:12px;background:#020617;border:1px solid rgba(255,255,255,0.15);color:white;margin-bottom:20px;">
+    <button id="loginBtn" style="width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,#4fd1c5,#667eea);border:none;font-weight:700;cursor:pointer;">Login</button>
+    <p id="loginError" style="color:#f87171;font-size:13px;margin-top:12px;display:none;">Invalid credentials</p>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none;">
+<header>
+  <div class="nav">
+    <div class="logo">Elite Dashboard</div>
+    <nav>
+      <a href="#">Overview</a>
+      <a href="#">Projects</a>
+      <a href="#">Security</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<section style="padding-top:140px;">
+  <div class="grid">
+    <div class="card reveal">
+      <h3>Security Status</h3>
+      <p style="font-size:32px;font-weight:700;color:#4fd1c5;">SECURE</p>
+      <p>Last scan: 2 minutes ago</p>
+    </div>
+    <div class="card reveal">
+      <h3>Active Projects</h3>
+      <p style="font-size:32px;font-weight:700;">7</p>
+      <p>AI & Cyber systems</p>
+    </div>
+    <div class="card reveal">
+      <h3>Threat Detection</h3>
+      <p style="font-size:32px;font-weight:700;color:#fbbf24;">LOW</p>
+      <p>No critical alerts</p>
+    </div>
+    <div class="card reveal">
+      <h3>AI Models</h3>
+      <p style="font-size:32px;font-weight:700;">5</p>
+      <p>Production-ready</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="reveal">System Activity</h2>
+  <div class="card reveal">
+    <p>> Initializing SOC modules...</p>
+    <p>> AI threat analyzer online</p>
+    <p>> No intrusion detected</p>
+    <p>> System integrity: OK</p>
+  </div>
+</section>
+
+
+
+<header>
+  <div class="nav">
+    <div class="logo">Fachri.dev</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#cert">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="reveal">
+    <div class="badge">Cybersecurity Engineer • AI Developer</div>
+    <h1>Membangun <span>Sistem Aman</span><br>dan <span>AI Cerdas</span></h1>
+    <p>
+      Saya fokus pada pengembangan keamanan siber, penetration testing, dan solusi Artificial Intelligence
+      modern untuk sistem skala enterprise.
+    </p>
+    <div class="actions">
+      <a href="#contact" class="primary">Hire Me</a>
+      <a href="#skills" class="secondary">Explore Skills</a>
+    </div>
+  </div>
+  <div class="photo reveal">
+    <!-- Ganti src dengan foto Anda -->
+    <img src="foto-saya.jpg" alt="Foto Saya">
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="reveal">Keahlian Utama</h2>
+  <div class="grid">
+    <div class="card reveal">
+      <h3>Cybersecurity</h3>
+      <p>Penetration Testing, Network Security, Malware Analysis, SOC, Digital Forensics.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Artificial Intelligence</h3>
+      <p>Machine Learning, Deep Learning, Computer Vision, NLP, AI Security.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Programming</h3>
+      <p>Python, JavaScript, Bash, C/C++, API Security, Automation.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Cloud & DevSecOps</h3>
+      <p>Docker, CI/CD, Cloud Security, Monitoring, Infrastructure Hardening.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cert">
+  <h2 class="reveal">Sertifikasi</h2>
+  <div class="grid">
+    <div class="card reveal cert">
+      <img src="cert1.jpg" alt="Certificate">
+      <div>
+        <h3>Certified Cybersecurity Professional</h3>
+        <p>Fokus pada keamanan jaringan dan sistem enterprise.</p>
+      </div>
+    </div>
+    <div class="card reveal cert">
+      <img src="cert2.jpg" alt="Certificate">
+      <div>
+        <h3>Dicoding & AI Engineer</h3>
+        <p>Pengembangan dan deployment AI skala produksi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="reveal">Kontak</h2>
+  <div class="grid">
+    <div class="card reveal">
+      <h3>Email</h3>
+      <p>fachrisyaputram@gmail.com</p>
+    </div>
+    <div class="card reveal">
+      <h3>LinkedIn / GitHub</h3>
+      <p>https://www.linkedin.com/in/muhammad-fachri-syaputra-1b4b63312?trk=contact-info<br>RSJXYROO.com</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Fachri • Cybersecurity & AI Portfolio
+</footer>
+</div>
+
+<script>
+  // AUTH LOGIC
+  const loginPage = document.getElementById('loginPage');
+  const dashboard = document.getElementById('dashboard');
+  const loginBtn = document.getElementById('loginBtn');
+  const loginError = document.getElementById('loginError');
+
+  const USER = 'admin';
+  const PASS = 'cyber123';
+
+  function checkAuth() {
+    if (localStorage.getItem('auth') === 'true') {
+      loginPage.style.display = 'none';
+      dashboard.style.display = 'block';
+    } else {
+      loginPage.style.display = 'flex';
+      dashboard.style.display = 'none';
+    }
+  }
+
+  loginBtn?.addEventListener('click', () => {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+
+    if (u === USER && p === PASS) {
+      localStorage.setItem('auth', 'true');
+      checkAuth();
+    } else {
+      loginError.style.display = 'block';
+    }
+  });
+
+  function logout() {
+    localStorage.removeItem('auth');
+    checkAuth();
+  }
+
+  checkAuth();
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('show');
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(r => observer.observe(r));
+</script>
+
+<!-- Certificate Modal -->
+<div id="certModal" style="position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:200;">
+  <div style="max-width:520px;width:90%;background:#0b0f1a;border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:28px;position:relative;">
+    <button id="closeModal" style="position:absolute;top:14px;right:14px;background:none;border:none;color:#9ca3af;font-size:18px;cursor:pointer;">✕</button>
+    <img id="modalImg" src="" alt="Certificate" style="width:100%;border-radius:14px;margin-bottom:16px;">
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc" style="color:#9ca3af;font-size:14px;"></p>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('certModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const closeModal = document.getElementById('closeModal');
+
+  document.querySelectorAll('#cert .card').forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      modalImg.src = card.querySelector('img').src;
+      modalTitle.innerText = card.querySelector('h3').innerText;
+      modalDesc.innerText = card.querySelector('p').innerText + '
+
+Issued by: International Certification Body
+Year: 2025';
+      modal.style.display = 'flex';
+    });
+  });
+
+  closeModal.onclick = () => modal.style.display = 'none';
+  modal.onclick = e => { if (e.target === modal) modal.style.display = 'none'; };
+</script>
+
+</body>
+</html>
